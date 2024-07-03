@@ -1,30 +1,43 @@
 <script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
+import { reactive } from 'vue'
+
+const userInfo1 = reactive({
+    name: '张三',
+    age: 20,
+    sex: '男'
+})
+
+const userInfo2 = reactive({
+    name: '李四',
+    age: 21,
+    sex: '女'
+})
+
+const handleUserName = (userInfo: any, newName: string) => {
+    userInfo.name = newName
+}
+
+const handleUserAge = (userInfo: any, newAge: number) => {
+    userInfo.age = newAge
+}
+
+const userEventHandlers = (userInfo: any) => ({
+    changeUserName: (newName: string) => handleUserName(userInfo, newName),
+    changeUserAge: (newAge: number) => handleUserAge(userInfo, newAge)
+})
 </script>
 
 <template>
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
-  </div>
-  <HelloWorld msg="Vite + Vue" />
+    <div>
+        <UserInfo
+            :name="userInfo1.name"
+            :age="userInfo1.age"
+            :sex="userInfo1.sex"
+            @changeUserName="handleUserName(userInfo1, $event)"
+            @changeUserAge="handleUserAge(userInfo1, $event)"
+        />
+        <UserInfo v-bind="userInfo2" v-on="userEventHandlers(userInfo2)" />
+    </div>
 </template>
 
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
-</style>
+<style scoped></style>
