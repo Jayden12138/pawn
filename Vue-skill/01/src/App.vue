@@ -28,15 +28,23 @@ const userEventHandlers = (userInfo: any) => ({
 </script>
 
 <template>
-    <div>
-        <UserInfo
-            :name="userInfo1.name"
-            :age="userInfo1.age"
-            :sex="userInfo1.sex"
-            @changeUserName="handleUserName(userInfo1, $event)"
-            @changeUserAge="handleUserAge(userInfo1, $event)"
-        />
-        <UserInfo v-bind="userInfo2" v-on="userEventHandlers(userInfo2)" />
+    <div class="container">
+        <div class="user-info-container">
+            <UserInfo
+                :name="userInfo1.name"
+                :age="userInfo1.age"
+                :sex="userInfo1.sex"
+                @changeUserName="handleUserName(userInfo1, $event)"
+                @changeUserAge="handleUserAge(userInfo1, $event)"
+            />
+            <UserInfo v-bind="userInfo2" v-on="userEventHandlers(userInfo2)" />
+        </div>
+        <div class="img-container">
+            <Img
+                imgSrc="https://www.naturalearthdata.com/wp-content/uploads/2018/05/brazil-ne-4d1-names-languages.gif"
+                imgCustomClass="rounded"
+            />
+        </div>
     </div>
 </template>
 

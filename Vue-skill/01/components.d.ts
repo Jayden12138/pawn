@@ -7,6 +7,7 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    Img: typeof import('./src/components/Img.vue')['default']
     UserInfo: typeof import('./src/components/UserInfo.vue')['default']
   }
 }
